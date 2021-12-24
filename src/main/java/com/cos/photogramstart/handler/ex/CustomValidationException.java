@@ -15,7 +15,6 @@ public class CustomValidationException extends RuntimeException{
         this.errorMap = errorMap;
     }
 
-
     public Map<String, String> getErrorMap() {
         return errorMap;
     }

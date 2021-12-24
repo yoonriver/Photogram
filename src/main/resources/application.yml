@@ -25,7 +25,8 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
-      
+
+#파일 업로드 설정
   servlet:
     multipart:
       enabled: true
@@ -36,9 +37,9 @@ spring:
       name: test
       password: 1234
 
-spring.main.allow-bean-definition-overriding: true
-
 file:
-  path: C:/workspace/springbootwork/upload/
+  path: D:\Coding\Clone\upload\ # \가 꼭 붙어있어야 함(파일 이름과 같이 쓸 때 구분짓기 위해)
+
+spring.main.allow-bean-definition-overriding: true
 
 
