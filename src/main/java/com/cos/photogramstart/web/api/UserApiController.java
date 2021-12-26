@@ -45,6 +45,8 @@ public class UserApiController {
         }else {
             User userEntity = userService.회원수정(id, userUpdateDto.toEntity());
             principalDetails.setUser(userEntity); // 세션 정보 갱신
+
+            // 응답시에 userEntity의 모든 getter 함수가 호출되고 JSON으로 파싱하여 응답한다.
             return new CMREspDto<>(1, "회원 수정 완료", userEntity);
         }
 
