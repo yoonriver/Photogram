@@ -3,8 +3,10 @@ package com.cos.photogramstart.service;
 import com.cos.photogramstart.config.auth.PrincipalDetails;
 import com.cos.photogramstart.domain.user.User;
 import com.cos.photogramstart.domain.user.UserRepository;
+import com.cos.photogramstart.domain.user.subscribe.SubscribeRepository;
 import com.cos.photogramstart.handler.ex.CustomException;
 import com.cos.photogramstart.handler.ex.CustomValidationApiException;
+import com.cos.photogramstart.web.dto.user.UserProfileDto;
 import com.cos.photogramstart.web.dto.user.UserUpdateDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -21,13 +23,26 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final SubscribeRepository subscribeRepository;
 
-    public User 회원프로필(Long userId) {
-        User userEntity = userRepository.findById(userId).orElseThrow(()-> {
+    public UserProfileDto 회원프로필(Long pageUserId, Long principalId) {
+        UserProfileDto dto = new UserProfileDto();
+
+        User userEntity = userRepository.findById(pageUserId).orElseThrow(()-> {
             throw new CustomException("해당 프로필 페이지는 없는 페이지입니다.");
         });
 
-        return userEntity;
+        dto.setUser(userEntity);
+        dto.setPageOwnerState(pageUserId == principalId); // true는 페이지 주인, false는 주인이 아님
+        dto.setImageCount(userEntity.getImages().size());
+
+        int subscribeState = subscribeRepository.mSubscribeState(principalId, pageUserId);
+        int subscribeCount = subscribeRepository.mSubScribeCount(pageUserId);
+
+        dto.setSubscribeState(subscribeState == 1);
+        dto.setSubscribeCount(subscribeCount);
+
+        return dto;
     }
 
     @Transactional
