@@ -5,12 +5,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigInteger;
+
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 public class SubscribeDto {
-    private int id;
+    private BigInteger id;
     private String username;
     private String profileImageUrl;
     private Integer subscribeState;
