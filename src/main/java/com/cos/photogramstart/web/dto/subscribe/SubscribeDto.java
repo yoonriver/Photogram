@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class SubscribeDto {
     private int id;
@@ -14,14 +16,4 @@ public class SubscribeDto {
     private Integer subscribeState;
     private Integer equalUserState;
 
-    public SubscribeDto() {
-    }
-
-    public SubscribeDto(int id, String username, String profileImageUrl, Integer subscribeState, Integer equalUserState) {
-        this.id = id;
-        this.username = username;
-        this.profileImageUrl = profileImageUrl;
-        this.subscribeState = subscribeState;
-        this.equalUserState = equalUserState;
-    }
 }
