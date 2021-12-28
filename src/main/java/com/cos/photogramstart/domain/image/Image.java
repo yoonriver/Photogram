@@ -18,7 +18,7 @@ public class Image {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     private String caption; // 글 내용
     private String postImageUrl; // 사진을 전송받아서 그 사진을 서버에 있는 특정 폴더에 저장 - DB에 그 저장된 경로를 Insert

@@ -25,7 +25,7 @@ public class UserService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final SubscribeRepository subscribeRepository;
 
-    public UserProfileDto 회원프로필(Long pageUserId, Long principalId) {
+    public UserProfileDto 회원프로필(int pageUserId, int principalId) {
         UserProfileDto dto = new UserProfileDto();
 
         User userEntity = userRepository.findById(pageUserId).orElseThrow(()-> {
@@ -46,7 +46,7 @@ public class UserService {
     }
 
     @Transactional
-    public User 회원수정(Long id, User user) {
+    public User 회원수정(int id, User user) {
         // 1. 영속화
         User userEntity = userRepository.findById(id).orElseThrow(() -> {return new CustomValidationApiException("찾을 수 없는 id입니다.");}); // .orElseThrow() 데이터가 없으면 예외처리
 
