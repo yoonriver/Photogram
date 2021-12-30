@@ -57,7 +57,7 @@ function getStoryItem(image) {
                             </button>
                         </div>
 
-                        <span class="like"><b id="storyLikeCount-1">3 </b>likes</span>
+                        <span class="like"><b id="storyLikeCount-${image.id}">${image.likeCount} </b>likes</span>
 
                         <div class="sl__item__contents__content">
                             <p>${image.caption}</p>
@@ -97,7 +97,7 @@ $(window).scroll(() => {
     let checkNum = $(window).scrollTop() - ($(document).height() - $(window).height());
 //    console.log(checkNum);
 
-    if(checkNum < 10 && checkNum > -10){
+    if(checkNum < 1 && checkNum > -1){
         page++;
         storyLoad();
     }
@@ -107,15 +107,49 @@ $(window).scroll(() => {
 // (3) 좋아요, 안좋아요
 function toggleLike(imageId) {
 	let likeIcon = $(`#storyLikeIcon-${imageId}`);
-	if (likeIcon.hasClass("far")) {
-		likeIcon.addClass("fas");
-		likeIcon.addClass("active");
-		likeIcon.removeClass("far");
-	} else {
-		likeIcon.removeClass("fas");
-		likeIcon.removeClass("active");
-		likeIcon.addClass("far");
-	}
+
+	if (likeIcon.hasClass("far")) { // 좋아요 하겠다
+
+	    $.ajax({
+	        type: "post",
+	        url: `/api/image/${imageId}/likes`,
+	        dataType: "json"
+	    }).done(res=>{
+
+            // 좋아요 개수 동적 구현
+	        let likeCountStr = $(`#storyLikeCount-${imageId}`).text();
+	        likeCountStr = Number(likeCountStr) + 1;
+            $(`#storyLikeCount-${imageId}`).text(likeCountStr); // #클래스.text(내용) 하면 해당 클래스 텍스트가 바뀜
+
+	        likeIcon.addClass("fas");
+            likeIcon.addClass("active");
+            likeIcon.removeClass("far");
+	    }).fail(error=>{
+            console.log("오류", error);
+	    });
+
+
+
+	} else { // 좋아요 취소하겠다
+
+        $.ajax({
+                type: "delete",
+                url: `/api/image/${imageId}/likes`,
+                dataType: "json"
+            }).done(res=>{
+                // 좋아요 개수 동적 구현
+                let likeCountStr = $(`#storyLikeCount-${imageId}`).text();
+                likeCountStr = Number(likeCountStr) - 1;
+                $(`#storyLikeCount-${imageId}`).text(likeCountStr); // #클래스.text(내용) 하면 해당 클래스 텍스트가 바뀜
+
+                likeIcon.removeClass("fas");
+                likeIcon.removeClass("active");
+                likeIcon.addClass("far");
+            }).fail(error=>{
+                console.log("오류", error);
+            });
+
+        }
 }
 
 // (4) 댓글쓰기
