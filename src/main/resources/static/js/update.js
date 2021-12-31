@@ -3,7 +3,8 @@ function update(userId, event) {
 
     event.preventDefault(); // 폼태그 액션을 막기!!
 
-//    profileUpdate 폼 태그 안에 있는 정보들을 data가 참조
+    // profileUpdate 폼 태그 안에 있는 정보들을 data가 참조
+    // .serilalize() : form 태그에 있는 key=value를 넘길 때 씀, 사진 x
     let data=$("#profileUpdate").serialize();
 
     console.log(data);
