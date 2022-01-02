@@ -47,6 +47,7 @@ public class User {
     //FetchType.Eager = User를 Select 할 때 해당 userId로 등록 된 image들을 전부 Join해서 가져와
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"user"}) // 필드변수 user를 제외하고 JSON으로 파싱
+    @OrderBy("id DESC")
     private List<Image> images;
 
 
@@ -57,4 +58,21 @@ public class User {
         this.createDate = LocalDateTime.now();
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", website='" + website + '\'' +
+                ", bio='" + bio + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", gender='" + gender + '\'' +
+                ", profileImageUrl='" + profileImageUrl + '\'' +
+                ", role='" + role + '\'' +
+                ", createDate=" + createDate +
+                '}';
+    }
 }

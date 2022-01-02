@@ -197,14 +197,15 @@ function addComment(imageId) {
                       <b>${comment.user.username}</b>
                       ${comment.content}
                     </p>
-                    // 버튼 출력 부분 수정, 바로 달았던 댓글이므로 무조건 자신의 댓글이기 때문에 조건문 필요 x
+                    <!-- 버튼 출력 부분 수정, 바로 달았던 댓글이므로 무조건 자신의 댓글이기 때문에 조건문 필요 x -->
                     <button onclick="deleteComment(${comment.id})"><i class="fas fa-times"></i></button>
                   </div>
         `;
         commentList.prepend(content);
 
     }).fail(error=>{
-        console.log("오류", error)
+        console.log("오류", error.responseJSON.data.content);
+        alert(error.responseJSON.data.content);
     });
 
 
