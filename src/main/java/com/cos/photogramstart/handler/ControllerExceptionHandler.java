@@ -8,6 +8,7 @@ import com.cos.photogramstart.util.Script;
 import com.cos.photogramstart.web.dto.CMRespDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,6 +49,11 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(CustomException.class)
     public String Exception(CustomException e) {
+        return Script.back(e.getMessage());
+    }
+
+    @ExceptionHandler(UsernameNotFoundException.class)
+    public String usernameException(UsernameNotFoundException e) {
         return Script.back(e.getMessage());
     }
 }

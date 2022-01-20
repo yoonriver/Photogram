@@ -41,18 +41,17 @@ spring:
     client:
       registration:
         facebook:
-          client-id: 1587166061652634
-          client-secret: 89348ab2f3767088182d119ccf271363
+          client-id: 233346395630388
+          client-secret: fb0f729ce43c31a6c4b13fd85098ee57
           scope:
             - public_profile
             - email
+#
+#  profiles:
+#    include: oauth
 
-  profiles:
-    include: oauth
-
-
-  file:
-    path: D:\Coding\Clone\upload\ # \가 꼭 붙어있어야 함(파일 이름과 같이 쓸 때 구분짓기 위해)
+file:
+  path: D:/Coding/Clone/upload/  # \가 꼭 붙어있어야 함(파일 이름과 같이 쓸 때 구분짓기 위해)
 
 spring.main.allow-bean-definition-overriding: true
 
