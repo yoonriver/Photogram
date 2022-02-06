@@ -41,7 +41,7 @@ spring:
     client:
       registration:
         facebook:
-          client-id: 
+          client-id:
           client-secret:
           scope:
             - public_profile

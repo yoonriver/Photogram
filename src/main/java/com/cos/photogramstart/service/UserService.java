@@ -92,7 +92,7 @@ public class UserService {
     @Transactional
     public User 회원수정(int id, User user) {
         // 1. 영속화
-        User userEntity = userRepository.findById(id).orElseThrow(() -> {return new CustomValidationApiException("찾을 수 없는 id입니다.");}); // .orElseThrow() 데이터가 없으면 예외처리
+        User userEntity = userRepository.findById(id).orElseThrow(() -> {throw new CustomValidationApiException("찾을 수 없는 id입니다.");}); // .orElseThrow() 데이터가 없으면 예외처리
 
         // 2. 영속화 된 오브젝트 수정 - 더티체킹(업데이트 완료)
         userEntity.setName(user.getName());
